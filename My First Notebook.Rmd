@@ -1,5 +1,5 @@
 ---
-title: "My First Portfolio Project!"
+title: "Maternal Health Risk Project"
 output: html_notebook
 editor_options: 
   markdown: 
@@ -35,14 +35,14 @@ Loading the data
 
 ```{r}
 #Loading the necessary Libraries
-options(prompt="R>")
+options(prompt = "R>")
 library(readr)
 library(dplyr)
 library(ggplot2)
 library(caret)
 #Loading the data
 setwd("C:/R Programming")
-data<-read.csv("C:/R Programming/Maternal Health Risk.csv")
+data <- read.csv("C:/R Programming/Maternal Health Risk.csv")
 #Chaecking the structure of the data
 str(data)
 ```
@@ -63,75 +63,79 @@ distributions and relationships
 #Data exploration
 summary(data)
 #histograms for each attribute
-ggplot(data,aes(x=Age))+geom_histogram(binwidth=2)+ggtitle("Age Distribution")
-ggplot(data,aes(x=SystolicBP))+geom_histogram(binwidth=5)+
+ggplot(data, aes(x = Age)) + geom_histogram(binwidth = 2)
++ ggtitle("Age Distribution")
+ggplot(data, aes(x = SystolicBP)) + geom_histogram(binwidth = 5) +
   ggtitle("Systolic BP Distribution")
-ggplot(data,aes(x=DiastolicBP))+geom_histogram(binwidth=5)+
+ggplot(data, aes(x = DiastolicBP)) + geom_histogram(binwidth = 5) +
   ggtitle("Diastolic BP Distribution")
-ggplot(data,aes(x=BS))+geom_histogram(binwidth=0.5)+
-  ggtitle("Blood Glucose Levels Distribution",subtitle= "Blood sugar levels")
-ggplot(data,aes(x=HeartRate))+geom_histogram(binwidth=5)+
+ggplot(data, aes(x = BS)) + geom_histogram(binwidth = 0.5) +
+  ggtitle("Blood Glucose Levels Distribution", subtitle = "Blood sugar levels")
+ggplot(data, aes(x = HeartRate)) + geom_histogram(binwidth = 5) +
   ggtitle("Heart Rate Distribution", subtitle = "How is your heart beating?")
 ```
 
 Correlation Analysis - We'll perform correlation Analysis to measure the
 strength and direction of the relationships between the individual
 variables - Correlation analysis identifies which variables are linearly
-related and helps in understanding the interdependencies among
+related and helps in understanding the inter dependencies among
 variables. This can indicate which variables might be predictive of risk
 levels
 
 ```{r}
 #correlation matrix
-cor_matrix<-cor(data %>%select(-RiskLevel))
+cor_matrix <- cor(data %>% select(-RiskLevel))
 print(cor_matrix)
 #Visualizing the relationships
 library(corrplot)
-corrplot(cor_matrix,method="circle")
+corrplot(cor_matrix, method = "circle")
 ```
 
 Assessing risk levels across age groups
 
 ```{r}
 #Assessing risk level across age groups
-age_breaks<-c(0,20,30,40,50,100)
-age_labels<-c("0-20","21-30","31-40","41-50","51+")
-data$AgeGroup<-cut(data$Age,breaks=age_breaks,labels=age_labels,right=FALSE)
-risk_age_table<-table(data$AgeGroup,data$RiskLevel)
+age_breaks <- c(0, 20, 30, 40, 50, 100)
+age_labels <- c("0-20", "21-30", "31-40", "41-50", "51+")
+data$AgeGroup <- cut(data$Age, breaks = age_breaks,
+                     labels = age_labels, right = FALSE)
+risk_age_table <- table(data$AgeGroup, data$RiskLevel)
 print(risk_age_table)
-risk_age_prop<-prop.table(risk_age_table,margin=1)
+risk_age_prop <- prop.table(risk_age_table, margin = 1)
 print(risk_age_prop)
 #visualizing the results
-ggplot(data,aes(x=AgeGroup,fill=RiskLevel))+geom_bar(position="Fill")+
-  labs(title="Distribution of Risk Levels aross Age Groups",
-       X="AgeGroup",y="proportion")+theme_minimal()
+ggplot(data, aes(x = AgeGroup, fill = RiskLevel)) +
+  geom_bar(position = "Fill") +
+  labs(title = "Distribution of Risk Levels aross Age Groups",
+       X = "AgeGroup", y = "proportion") + theme_minimal()
 ```
 
 Multinomial Logistic Regression - we'll create a multinomial logistic
 regression model to assess how various attributes relate to the Risk
-Level - I used the relevel function to explicitely set the reference
+Level - I used the re level function to explicitly set the reference
 category to 'mid risk' and 'low risk' before running the model in the
 two consecutive times
 
 ```{r}
-#multinomial logistic regression 
+#multinomial logistic regression
 library(nnet)
-data$RiskLevel<-as.factor(data$RiskLevel)
-model_multinom <- multinom(RiskLevel ~ Age + SystolicBP + DiastolicBP + BS + 
-                             HeartRate,data=data)
+data$RiskLevel <- as.factor(data$RiskLevel)
+model_multinom <- multinom(RiskLevel ~ Age + SystolicBP + DiastolicBP + BS +
+                             HeartRate, data = data)
 summary(model_multinom)
 #Risk Frequencies
-risk_frequencies<-table(data$RiskLevel)
+risk_frequencies <- table(data$RiskLevel)
 print(risk_frequencies)
-barplot(risk_frequencies,main="Frequencies of Risk Levels",xlab="Risk Level",
-        ylab="Frequency",col="blue")
-data$RiskLevel<-relevel(data$RiskLevel,ref="low risk") 
+barplot(risk_frequencies, main = "Frequencies of Risk Levels",
+        xlab = "Risk Level",
+        ylab = "Frequency", col = "blue")
+data$RiskLevel <- relevel(data$RiskLevel, ref = "low risk")
 #Using Relevel to explicitely set different reference categories
 model_multinom <- multinom(RiskLevel ~ Age + SystolicBP + DiastolicBP + BS +
-                             HeartRate,data=data)
+                             HeartRate, data = data)
 summary(model_multinom)
-data$RiskLevel<-relevel(data$RiskLevel,ref="mid risk")
-model_multinom <- multinom(RiskLevel ~ Age + SystolicBP + DiastolicBP + BS + 
-                             HeartRate,data=data)
+data$RiskLevel <- relevel(data$RiskLevel, ref = "mid risk")
+model_multinom <- multinom(RiskLevel ~ Age + SystolicBP + DiastolicBP + BS +
+                             HeartRate, data = data)
 summary(model_multinom)
 ```
