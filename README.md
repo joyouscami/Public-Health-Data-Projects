@@ -1,11 +1,12 @@
-🩺 Public Health R Scripts
-📌 Overview
+### Public Health R Scripts
+
+### Overview
 
 This repository is a collection of R scripts analyzing various public health datasets. It represents my first attempt at sharing code on GitHub, and while some scripts are still a work-in-progress, this repo is a milestone in my journey into data analysis and public health research.
 
 The analyses focus on different aspects of public health, from mental health to maternal health, and studies on key populations. Each script demonstrates exploratory data analysis (EDA), statistical testing, and in some cases, predictive modeling.
 
-🛠️ Methods Used
+### Methods Used
 
 Across the scripts, I experimented with:
 
@@ -21,15 +22,15 @@ Across the scripts, I experimented with:
 
 - Visualization: ggplot2 plots for trends and comparisons
 
-📊 Datasets
+### Datasets
 
 All datasets analyzed here are publicly available and used purely for learning purposes.
 
-🧠 Mental Health: Exploring prevalence and correlates of mental health issues.
+    Mental Health: Exploring prevalence and correlates of mental health issues.
 
-🤰 Maternal Health: Investigating factors influencing maternal outcomes.
+    Maternal Health: Investigating factors influencing maternal outcomes.
 
-🧑‍🤝‍🧑 Key Populations: Analyzing HIV-related service uptake among vulnerable groups.
+    Key Populations: Analyzing HIV-related service uptake among vulnerable groups.
 
 ▶️ How to Use
 
@@ -53,7 +54,7 @@ install.packages(c("tidyverse", "psych", "car", "broom", "GPArotation"))
 
 Some analyses are incomplete — and that’s intentional! This repo documents my learning curve, and I plan to refine, expand, and improve the scripts over time.
 
-✨ Why This Repo Matters to Me
+### Why This Repo Matters to Me
 
 This was my first GitHub repository, and it represents my first step into:
 
@@ -65,6 +66,6 @@ Exploring how data can answer important public health questions.
 
 It’s not perfect, but it’s meaningful — and it’s the starting point for everything I’ve built since.
 
-🧑‍🤝‍🧑 Acknowledgments
+### Acknowledgments
 
 Thanks to the organizations and researchers who made these datasets publicly available, allowing learners like me to practice and grow.
