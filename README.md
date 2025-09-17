@@ -50,7 +50,7 @@ Install the required R packages before running the scripts:
 
 install.packages(c("tidyverse", "psych", "car", "broom", "GPArotation"))
 
-🚧 Work in Progress
+### Work in Progress
 
 Some analyses are incomplete — and that’s intentional! This repo documents my learning curve, and I plan to refine, expand, and improve the scripts over time.
 
