@@ -24,7 +24,7 @@ Across the scripts, I experimented with:
 
 ### Datasets
 
-All datasets analyzed here are publicly available and used purely for learning purposes.
+All datasets analyzed here are publicly available on Kaggle and used purely for learning purposes.
 
     Mental Health: Exploring prevalence and correlates of mental health issues.
 
@@ -34,21 +34,21 @@ All datasets analyzed here are publicly available and used purely for learning p
 
 ▶️ How to Use
 
-Clone the repository:
+ - Clone the repository:
 
-git clone https://github.com/joyouscami/public-health-data-projects.git
-cd public-health-data-projects
+       git clone https://github.com/joyouscami/public-health-data-projects.git
+       cd public-health-data-projects
 
 
-Open R or RStudio.
+ - Open R or RStudio.
 
-Run the scripts in each folder. Adjust dataset file paths if needed.
+ - Run the scripts in each folder. Adjust dataset file paths if needed.
 
-Dependencies
+### Dependencies
 
-Install the required R packages before running the scripts:
+ - Install the required R packages before running the scripts:
 
-install.packages(c("tidyverse", "psych", "car", "broom", "GPArotation"))
+       install.packages(c("tidyverse", "psych", "car", "broom", "GPArotation"))
 
 ### Work in Progress
 
@@ -58,11 +58,11 @@ Some analyses are incomplete — and that’s intentional! This repo documents m
 
 This was my first GitHub repository, and it represents my first step into:
 
-Writing reproducible code in R.
+ - Writing reproducible code in R.
 
-Sharing my work publicly.
+ - Sharing my work publicly.
 
-Exploring how data can answer important public health questions.
+ - Exploring how data can answer important public health questions.
 
 It’s not perfect, but it’s meaningful — and it’s the starting point for everything I’ve built since.
 
